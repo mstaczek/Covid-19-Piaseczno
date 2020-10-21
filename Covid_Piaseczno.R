@@ -118,10 +118,13 @@ saveToCSV <- function(dataframe, path="") {
   }
   fileTimestamp <- stri_replace_all_fixed(format(Sys.time(), "%Y-%m-%d_%X"),":","-")
   pathWithFilename <- paste(path, "danePiaseczno_", fileTimestamp,".csv", sep="")
+  pathWithFilenameLatest <- paste(path, "danePiaseczno_latest.csv", sep="")
   
   write.csv(dataframe, pathWithFilename)
+  write.csv(dataframe, pathWithFilenameLatest)
   
   print(paste('Files saved successfully to', pathWithFilename,'.'))
+  print(paste('Files saved successfully to', pathWithFilenameLatest,'.'))
 }
 
 
@@ -137,24 +140,24 @@ saveToCSV(freshData)
 
 
 
-# Some simple grey plots with ggplot2
+# Some simple plots with ggplot2
 
-ggplot(freshData, aes(x = Date, y = Confirmed - Cured)) +
-  geom_bar(stat="identity", fill = "#949494") +
+ggplot(freshData, aes(x = Date, y = Confirmed - Cured, fill = Confirmed - Cured)) +
+  geom_bar(stat="identity") +
   xlab("Timeline") +
   ylab("No. cases") + 
   labs(title = "Active cases in Piaseczno")
 
 
-ggplot(freshData, aes(x = Date, y = Confirmed)) +
-  geom_bar(stat="identity", fill = "#949494") +
+ggplot(freshData, aes(x = Date, y = Confirmed, fill = Confirmed)) +
+  geom_bar(stat="identity") +
   xlab("Timeline") +
   ylab("Total confirmed cases") + 
   labs(title = "Confirmed cases in Piaseczno")
 
 
-ggplot(freshData, aes(x = Date, y = New_confirmed)) +
-  geom_bar(stat="identity", fill = "#949494") +
+ggplot(freshData, aes(x = Date, y = New_confirmed, fill = New_confirmed)) +
+  geom_bar(stat="identity") +
   xlab("Timeline") +
   ylab("New confirmed cases") + 
   labs(title = "New confirmed cases in Piaseczno")
