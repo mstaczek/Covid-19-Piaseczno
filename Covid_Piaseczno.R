@@ -129,13 +129,36 @@ saveToCSV <- function(dataframe, path="") {
   print(paste('Files saved successfully to', pathWithFilenameLatest,'.'))
 }
 
+# for plotting ECDC
+ECDCcolumn <- function(df) {
+  nc <- rev(df$New_confirmed)
+  b <- cumsum(nc)
+  d <- c(rep(0,14), b[1:(length(b)-14)])
+  res <- b-d
+  rev(res/19)
+}
+
+ECDCdeltacolumn <- function(df){
+  ecdc <- ECDCcolumn(df)
+  moved <- c(ecdc[2:length(ecdc)], 0)
+  ecdc - moved
+}
+
+addECDCcolumns <- function(df) {
+  df %>% mutate("ECDC" = ECDCcolumn(df),
+           "ECDCdelta" = ECDCdeltacolumn(df))
+}
+
 
 # To get a ready-to-use tibble, use 'getData' function  
 freshData <- getData()
+
+# adds "ECDC" and "ECDCdelta" comulns
+updatedDate <-addECDCcolumns(freshData)
 
 # You may change the path below to set the default output directory
 # or pass the desired path as a 'path' argument to 'saveToCSV' function
 
 # directoryToSaveCSV <- "C:\\Path\\to\\directory\\"
 
-saveToCSV(freshData)
+saveToCSV(updatedDate)
