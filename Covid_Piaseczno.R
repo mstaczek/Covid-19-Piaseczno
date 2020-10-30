@@ -17,9 +17,11 @@ extractDataFromPage <- function(url) {
   
   # Extract the data from the page
   all <- webpage %>%
+    html_nodes(".arc_102") %>%
     html_nodes("li") %>%
     html_text()
   datesRaw <- webpage %>%
+    html_nodes(".arc_102") %>%
     html_nodes("time") %>%
     html_text() 
   return(list(datesRaw=datesRaw, all=all))
@@ -137,27 +139,3 @@ freshData <- getData()
 # directoryToSaveCSV <- "C:\\Path\\to\\directory\\"
 
 saveToCSV(freshData)
-
-
-
-# Some simple plots with ggplot2
-
-ggplot(freshData, aes(x = Date, y = Confirmed - Cured, fill = Confirmed - Cured)) +
-  geom_bar(stat="identity") +
-  xlab("Timeline") +
-  ylab("No. cases") + 
-  labs(title = "Active cases in Piaseczno")
-
-
-ggplot(freshData, aes(x = Date, y = Confirmed, fill = Confirmed)) +
-  geom_bar(stat="identity") +
-  xlab("Timeline") +
-  ylab("Total confirmed cases") + 
-  labs(title = "Confirmed cases in Piaseczno")
-
-
-ggplot(freshData, aes(x = Date, y = New_confirmed, fill = New_confirmed)) +
-  geom_bar(stat="identity") +
-  xlab("Timeline") +
-  ylab("New confirmed cases") + 
-  labs(title = "New confirmed cases in Piaseczno")
