@@ -1,7 +1,6 @@
 library(rvest)
 library(stringi)
 library(dplyr)
-library(ggplot2)
 
 
 ### The few functions below gather all data from sites like this one:
@@ -149,16 +148,28 @@ addECDCcolumns <- function(df) {
            "ECDCdelta" = ECDCdeltacolumn(df))
 }
 
+# for plotting new lockdown rate 
+NewLockdownRatecolumn <- function(df) {
+  nc <- rev(df$New_confirmed)
+  b <- cumsum(nc)
+  d <- c(rep(0,7), b[1:(length(b)-7)])
+  res <- b-d
+  rev(res/(1.9*7))
+}
+
+addNewLockdownRatecolumns <- function(df) {
+  df %>% mutate("NewLockdownRate" = NewLockdownRatecolumn(df))
+}
+
 
 # To get a ready-to-use tibble, use 'getData' function  
 freshData <- getData()
 
-# adds "ECDC" and "ECDCdelta" comulns
-updatedDate <-addECDCcolumns(freshData)
+# adds "ECDC", "ECDCdelta" and "NewLockdownRate" comulns
+updatedDate <-addNewLockdownRatecolumns(addECDCcolumns(freshData))
 
 # You may change the path below to set the default output directory
 # or pass the desired path as a 'path' argument to 'saveToCSV' function
 
 # directoryToSaveCSV <- "C:\\Path\\to\\directory\\"
-
 saveToCSV(updatedDate)
