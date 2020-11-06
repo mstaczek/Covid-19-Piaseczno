@@ -1,11 +1,14 @@
 library(ggplot2)
+library(scales)
 
 NewLockdownRatePlot <- function(df) {
   ggplot(df, aes(x = Date, y = NewLockdownRate, fill = NewLockdownRate)) +
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("ECDC") + 
-    labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people)")
+    labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people)") +
+    scale_y_continuous(n.breaks = 7, limits=c(0,70))+
+    geom_hline(yintercept = 70, color="red1", size=1.3)
 }
 
 OldRatePlot <- function(df) {
@@ -13,7 +16,7 @@ OldRatePlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("Rate") + 
-    labs(title = "Rate - New cases from previous 14 days / 10k people")
+    labs(title = "Old Rate - New cases from previous 14 days / 10k people")
 }
 
 OldRatedeltasPlot <- function(df) {
