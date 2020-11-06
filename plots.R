@@ -5,23 +5,23 @@ NewLockdownRatePlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("ECDC") + 
-    labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people")
+    labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people)")
 }
 
-ECDCPlot <- function(df) {
+OldRatePlot <- function(df) {
   ggplot(df, aes(x = Date, y = ECDC, fill = ECDC)) +
     geom_bar(stat="identity") +
     xlab("Timeline") +
-    ylab("ECDC") + 
-    labs(title = "ECDC - New cases from previous 14 days / 10k people")
+    ylab("Rate") + 
+    labs(title = "Rate - New cases from previous 14 days / 10k people")
 }
 
-ECDCdeltasPlot <- function(df) {
+OldRatedeltasPlot <- function(df) {
   ggplot(df, aes(x = Date, y = ECDCdelta, fill = ECDCdelta)) +
     geom_bar(stat="identity") +
     xlab("Timeline") +
-    ylab("ECDC delta") + 
-    labs(title = "ECDC Changes from the the previous day")
+    ylab("Old Rate delta") + 
+    labs(title = "Old Rate Changes from the the previous day")
 }
 
 
