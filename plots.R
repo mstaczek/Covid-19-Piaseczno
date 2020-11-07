@@ -5,7 +5,7 @@ NewLockdownRatePlot <- function(df) {
   ggplot(df, aes(x = Date, y = NewLockdownRate, fill = NewLockdownRate)) +
     geom_bar(stat="identity") +
     xlab("Timeline") +
-    ylab("ECDC") + 
+    ylab("New Rate") + 
     labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people)") +
     scale_y_continuous(n.breaks = 7, limits=c(0,70))+
     geom_hline(yintercept = 70, color="red1", size=1.3)
