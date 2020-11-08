@@ -7,3 +7,5 @@
 !/docs/*
 !.gitignore
 !index.Rmd
+!/.github
+!/.github/*
