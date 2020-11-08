@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 # setwd("./Covid-19-Piaseczno")
 
-# source("Covid_Piaseczno.R")
+source("Covid_Piaseczno.R")
 
 library(dplyr)
 fromJune <- read.csv("danePiaseczno_latest.csv") %>% mutate(Date = as.Date(Date))
