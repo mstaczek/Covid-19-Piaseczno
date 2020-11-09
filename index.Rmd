@@ -2,7 +2,10 @@
 title: "COVID in Piaseczno"
 author: "by Mateusz Stączek"
 date: "`r format(Sys.time(), '%d-%m-%Y')`"
-output: html_document
+output:
+  html_document:
+    includes:
+      in_header: "favicon.html"
 ---
 
 ```{r setup, include=FALSE}
