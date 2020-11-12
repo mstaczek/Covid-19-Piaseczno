@@ -1,0 +1,43 @@
+name: Scheduled looking for updates
+on: 
+  schedule:
+    cron:  '0,30 13,14,15 * * *'
+jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Downloading original and my page
+        run: |
+          wget http://piaseczno.psse.waw.pl/aktualnosci-i-komunikaty/komunikaty -O page.txt -t 5
+          wget https://mstaczek.github.io/covid/ -O mypage.txt -t 2
+      - name: Checking for updates
+        run: |
+          echo
+          echo 
+          echo "---Looking for today's data---"
+          echo
+          today=`date +'%d.%m.%Y'`
+          toSearch="Stan danych w powiecie na godzinę 13.00 w dniu ${today} r."
+          if [[ `cat page.txt` == *$toSearch* ]] ; then
+            echo 
+            echo "---Today's data is availabe---"
+            echo
+            echo "---Is website up to date?---"
+            echo
+            echo
+            today2="Latest from `date +'%d-%m-%Y'`"
+            if [[ `cat mypage.txt` == *$toSearch* ]] ; then
+              echo "---Website is up to date---"
+            else
+              echo "---Updating website - starting another workflow---"
+              curl -H "Authorization: token ${{ secrets.GH_PAT }}" \
+                --request POST \
+                --data '{"event_type": "update-webpage"}' \
+                https://api.github.com/repos/mstaczek/covidTests2/dispatches
+            fi ;
+          else
+            echo "---No new data available---"
+          fi ;
+          echo
+          echo
+          echo "---Finished script---"
