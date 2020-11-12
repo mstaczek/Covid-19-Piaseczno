@@ -33,7 +33,7 @@ jobs:
               curl -H "Authorization: token ${{ secrets.GH_PAT }}" \
                 --request POST \
                 --data '{"event_type": "update-webpage"}' \
-                https://api.github.com/repos/mstaczek/covidTests2/dispatches
+                https://api.github.com/repos/mstaczek/covid/dispatches
             fi ;
           else
             echo "---No new data available---"

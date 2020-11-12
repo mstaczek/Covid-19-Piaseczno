@@ -1,7 +1,9 @@
 name: Daily Webpage Update
 on:
-  schedule:
-    - cron:  '15 13,14,15 * * *'
+  repository_dispatch:
+    types: update-webpage
+  workflow_dispatch:
+  
 jobs:
   daily-update-webpage:
     runs-on: ubuntu-latest
