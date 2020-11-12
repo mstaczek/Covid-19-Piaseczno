@@ -1,7 +1,7 @@
 name: Scheduled looking for updates
-on: 
+on:
   schedule:
-    cron:  '0,30 13,14,15 * * *'
+    - cron:  '0,30 13,14,15 * * *'
 jobs:
   printInputs:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
             echo
             echo
             today2="Latest from `date +'%d-%m-%Y'`"
-            if [[ `cat mypage.txt` == *$toSearch* ]] ; then
+            if [[ `cat mypage.txt` == *$today2* ]] ; then
               echo "---Website is up to date---"
             else
               echo "---Updating website - starting another workflow---"
