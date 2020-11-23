@@ -3,12 +3,13 @@ library(scales)
 
 NewLockdownRatePlot <- function(df) {
   ggplot(df, aes(x = Date, y = NewLockdownRate, fill = NewLockdownRate)) +
+    geom_hline(yintercept = 70, color="red1", size=1.3) +
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("New Rate") + 
-    labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people)") +
-    scale_y_continuous(n.breaks = 7, limits=c(0,70))+
-    geom_hline(yintercept = 70, color="red1", size=1.3)
+    labs(title = "Lockdown at 70 (Mean new cases from last 7 days / 100k people)")+
+    scale_y_continuous(n.breaks = 7, limits=c(0,max(70,df$NewLockdownRate)))+
+    theme(legend.position = "none")
 }
 
 OldRatePlot <- function(df) {
@@ -16,7 +17,8 @@ OldRatePlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("Rate") + 
-    labs(title = "Old Rate - New cases from previous 14 days / 10k people")
+    labs(title = "Old Rate - New cases from previous 14 days / 10k people")+
+    theme(legend.position = "none")
 }
 
 OldRatedeltasPlot <- function(df) {
@@ -24,7 +26,8 @@ OldRatedeltasPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("Old Rate delta") + 
-    labs(title = "Old Rate Changes from the the previous day")
+    labs(title = "Old Rate Changes from the the previous day")+
+    theme(legend.position = "none")
 }
 
 
@@ -34,7 +37,8 @@ ActiveCasesPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Date") +
     ylab("No. cases") + 
-    labs(title = "Active cases in Piaseczno")
+    labs(title = "Active cases in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 TotalConfirmedPlot <- function(df) {
@@ -42,7 +46,8 @@ TotalConfirmedPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. cases") + 
-    labs(title = "Confirmed cases in Piaseczno")
+    labs(title = "Confirmed cases in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 TotalCuredPlot <- function(df) {
@@ -50,7 +55,8 @@ TotalCuredPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. cases") + 
-    labs(title = "Cured cases in Piaseczno")
+    labs(title = "Cured cases in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 NewConfirmedPlot <- function(df) {
@@ -58,7 +64,8 @@ NewConfirmedPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. cases") + 
-    labs(title = "New confirmed cases in Piaseczno")
+    labs(title = "New confirmed cases in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 NewCuredPlot <- function(df) {
@@ -66,7 +73,8 @@ NewCuredPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. cases") + 
-    labs(title = "New cured cases in Piaseczno")
+    labs(title = "New cured cases in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 TotalDeceasedPlot <- function(df) {
@@ -74,7 +82,8 @@ TotalDeceasedPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. deceased") + 
-    labs(title = "Deceased in Piaseczno")
+    labs(title = "Deceased in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 QuarantinedPlot <- function(df) {
@@ -82,7 +91,8 @@ QuarantinedPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. cases") + 
-    labs(title = "Quarantined now in Piaseczno")
+    labs(title = "Quarantined now in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 NewQuarantinedPlot <- function(df) {
@@ -90,7 +100,8 @@ NewQuarantinedPlot <- function(df) {
     geom_bar(stat="identity") +
     xlab("Timeline") +
     ylab("No. cases") + 
-    labs(title = "New quarantined in Piaseczno")
+    labs(title = "New quarantined in Piaseczno")+
+    theme(legend.position = "none")
 }
 
 
