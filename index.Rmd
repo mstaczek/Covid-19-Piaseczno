@@ -41,10 +41,14 @@ meta() %>%
   )
 ```
 
+# Data is not longer available [24.11.2020]
+
+Since 23 of November 2020 all data about COVID is published with lower precision (no more updates about Piaseczno County...) and is under more strict control by government. What probably was made to prevent more discoveries about data gathered from all smaller parts of Poland not summing up to data told us by government, may result in spreading false information and manipulating the society, not to mention no real benefit for the country as a whole. 
+
+
 # Disclaimer 
 
 This site was created solely for learning purposes, therefore information presented below should not be considered as official nor accurate, so may contain mistakes and be misleading. Data is gathered daily from [here](http://piaseczno.psse.waw.pl/aktualnosci-i-komunikaty/komunikaty), the official feed with daily news about COVID in the Piaseczno County with total of 190 000 habitants. Code to download data is [there](https://github.com/mstaczek/covid)
-
 
 # Latest from `r format(fromSeptember$Date[1], '%d-%m-%Y')`
 
